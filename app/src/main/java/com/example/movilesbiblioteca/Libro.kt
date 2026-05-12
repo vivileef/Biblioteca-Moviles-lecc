@@ -1,0 +1,100 @@
+package com.example.movilesbiblioteca
+
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+
+data class Libro(
+    val id: Int,
+    val titulo: String,
+    val autor: String,
+    val anio: Int,
+    val genero: String,
+    val sinopsis: String,
+    val puntuacion: Float,
+    val resenas: Int,
+    val icon: ImageVector = Icons.AutoMirrored.Filled.MenuBook,
+)
+
+val listaLibrosDummy = listOf(
+    Libro(
+        id = 1,
+        titulo = "Sapiens: De Animales a Dioses",
+        autor = "Yuval Noah Harari",
+        anio = 2011,
+        genero = "Historia / Antropología",
+        sinopsis = "Un relato apasionante de la historia de la humanidad, desde los primeros humanos que caminaron sobre la Tierra hasta los radicales y a veces devastadores avances de nuestra propia especie.",
+        puntuacion = 4.5f,
+        resenas = 1234,
+    ),
+    Libro(
+        id = 2,
+        titulo = "1984",
+        autor = "George Orwell",
+        anio = 1949,
+        genero = "Distopía",
+        sinopsis = "En una sociedad futura, el Gran Hermano lo vigila todo. Winston Smith decide rebelarse contra un sistema que controla hasta el pensamiento.",
+        puntuacion = 4.8f,
+        resenas = 5678,
+    ),
+    Libro(
+        id = 3,
+        titulo = "El Principito",
+        autor = "Antoine de Saint-Exupéry",
+        anio = 1943,
+        genero = "Fábula",
+        sinopsis = "Un pequeño príncipe viaja de planeta en planeta descubriendo la extraña forma en que los adultos ven la vida.",
+        puntuacion = 4.9f,
+        resenas = 9012,
+    ),
+    Libro(
+        id = 4,
+        titulo = "Don Quijote de la Mancha",
+        autor = "Miguel de Cervantes",
+        anio = 1605,
+        genero = "Novela",
+        sinopsis = "Las aventuras de un hidalgo que, tras leer demasiados libros de caballería, decide convertirse en caballero andante.",
+        puntuacion = 4.7f,
+        resenas = 3456,
+    ),
+    Libro(
+        id = 5,
+        titulo = "Cien Años de Soledad",
+        autor = "Gabriel García Márquez",
+        anio = 1967,
+        genero = "Realismo Mágico",
+        sinopsis = "La historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.",
+        puntuacion = 4.6f,
+        resenas = 7890,
+    ),
+    Libro(
+        id = 6,
+        titulo = "Hábitos Atómicos",
+        autor = "James Clear",
+        anio = 2018,
+        genero = "Autoayuda",
+        sinopsis = "Una guía práctica para desarrollar buenos hábitos y romper con los malos a través de pequeños cambios cotidianos.",
+        puntuacion = 4.8f,
+        resenas = 1122,
+    ),
+    Libro(
+        id = 7,
+        titulo = "El Hobbit",
+        autor = "J.R.R. Tolkien",
+        anio = 1937,
+        genero = "Fantasía",
+        sinopsis = "Bilbo Bolsón se ve arrastrado a una aventura épica para recuperar un tesoro custodiado por el dragón Smaug.",
+        puntuacion = 4.7f,
+        resenas = 3344,
+    ),
+    Libro(
+        id = 8,
+        titulo = "El Código Da Vinci",
+        autor = "Dan Brown",
+        anio = 2003,
+        genero = "Misterio / Thriller",
+        sinopsis = "El experto en simbología Robert Langdon investiga un asesinato en el Louvre que revela una conspiración milenaria.",
+        puntuacion = 4.2f,
+        resenas = 5566,
+    ),
+)
