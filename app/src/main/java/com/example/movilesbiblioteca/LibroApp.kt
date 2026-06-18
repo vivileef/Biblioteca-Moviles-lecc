@@ -1,44 +1,61 @@
 package com.example.movilesbiblioteca
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 enum class Pantalla {
-    INICIO, CATALOGO, DETALLE
+    INICIO, CATALOGO, DETALLE, FORMULARIO
 }
 
 @Composable
-fun LibroApp() {
-    val pantallaActual = rememberSaveable { mutableStateOf(Pantalla.INICIO) }
-    val libroSeleccionado = remember { mutableStateOf<Libro?>(null) }
+fun LibroApp(viewModel: LibroViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    when (pantallaActual.value) {
+    when (uiState.pantallaActual) {
         Pantalla.INICIO -> {
             LibroHomeScreen {
-                pantallaActual.value = Pantalla.CATALOGO
+                viewModel.navegarA(Pantalla.CATALOGO)
             }
         }
 
         Pantalla.CATALOGO -> {
             LibroCatalogScreen(
-                libros = listaLibrosDummy,
+                libros = uiState.listaLibros,
                 onLibroClick = { libro ->
-                    libroSeleccionado.value = libro
-                    pantallaActual.value = Pantalla.DETALLE
+                    viewModel.seleccionarLibro(libro)
                 },
-            ) {
-                pantallaActual.value = Pantalla.INICIO
-            }
+                onBack = {
+                    viewModel.volverAlInicio()
+                },
+                onAddClick = {
+                    viewModel.navegarA(Pantalla.FORMULARIO)
+                }
+            )
         }
 
         Pantalla.DETALLE -> {
-            libroSeleccionado.value?.let { libro ->
-                LibroDetailScreen(libro = libro) {
-                    pantallaActual.value = Pantalla.CATALOGO
-                }
+            uiState.libroSeleccionado?.let { libro ->
+                LibroDetailScreen(
+                    libro = libro,
+                    onBack = {
+                        viewModel.volverALaLista()
+                    }
+                )
             }
+        }
+
+        Pantalla.FORMULARIO -> {
+            LibroFormScreen(
+                onLibroAdded = { nuevoLibro ->
+                    viewModel.agregarLibro(nuevoLibro)
+                    viewModel.volverALaLista()
+                },
+                onBack = {
+                    viewModel.volverALaLista()
+                }
+            )
         }
     }
 }

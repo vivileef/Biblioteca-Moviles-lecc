@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ fun LibroCatalogScreen(
     libros: List<Libro>,
     onLibroClick: (Libro) -> Unit,
     onBack: () -> Unit,
+    onAddClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -39,6 +41,15 @@ fun LibroCatalogScreen(
                 )
             )
         },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddClick,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Agregar Libro")
+            }
+        }
     ) { padding ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(count = 2),
@@ -64,5 +75,6 @@ fun LibroCatalogScreenPreview() {
         libros = listaLibrosDummy,
         onLibroClick = { },
         onBack = { },
+        onAddClick = { },
     )
 }
